@@ -6,13 +6,13 @@ namespace Bibliotheekbeheer
     //properties
     public string Title { get; set; }
     public string Author { get; set; }
-    public int ISBN { get; set; }
-    public int PublicationYear { get; set; }
+    public int? ISBN { get; set; }
+    public int? PublicationYear { get; set; }
     public string Genre { get; set; }
 
 
     //constructor
-    public Book(string title, string author, int iSBN = 0, int publicationYear = 000, string genre = "Onbekend")
+    public Book(string title, string author, int iSBN = 0, int publicationYear = 0000, string genre = "Onbekend")
     {
       Title = title;
       Author = author;
@@ -26,7 +26,7 @@ namespace Bibliotheekbeheer
     //Display Book Details
     public virtual void DisplayDetails()
     {
-      Console.WriteLine($"Titel: {Title}\nAuteur: {Author}\nPublicatiejaar: {PublicationYear}\nGenre: {Genre}");
+      Console.WriteLine($"Titel: {Title}\nAuteur: {Author}\nPublicatiejaar: {PublicationYear}\nGenre: {Genre}\nISBN: {ISBN}");
     }
 
     //check if book is match with query

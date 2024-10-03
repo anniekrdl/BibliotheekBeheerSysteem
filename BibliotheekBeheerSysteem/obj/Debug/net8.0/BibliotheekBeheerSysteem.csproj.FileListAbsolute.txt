@@ -12,3 +12,4 @@ C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheer
 C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\obj\Debug\net8.0\BibliotheekBeheerSysteem.pdb
 C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\obj\Debug\net8.0\BibliotheekBeheerSysteem.genruntimeconfig.cache
 C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\obj\Debug\net8.0\ref\BibliotheekBeheerSysteem.dll
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\obj\Debug\net8.0\BibliotheekBeheerSysteem.sourcelink.json

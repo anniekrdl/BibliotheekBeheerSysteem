@@ -5,7 +5,7 @@ namespace Bibliotheekbeheer{
 {
    static void Main(string[] args)
    {
-    
+    /*
     Book book1 = new Book("title1", "author1");
     Book book2 = new Book("title2", "author2");
     Book book3 = new Book("title3", "author3");
@@ -17,6 +17,14 @@ namespace Bibliotheekbeheer{
     library.AddBook(book3);
 
     library.ListBooks();
+    */
+
+    UI ui = new UI();
+
+    ui.Run();
+
+
+
    }
 }
 

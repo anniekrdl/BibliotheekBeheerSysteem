@@ -4,7 +4,7 @@ namespace Bibliotheekbeheer
   {
 
     //constructor
-    public Ebook(string title, string author,int fileSize, int iSBN = 0, int publicationYear = 000, string genre = "Onbekend") : base(title, author, iSBN, publicationYear, genre)
+    public Ebook(string title, string author,int fileSize, int iSBN = 0, int publicationYear = 0000, string genre = "Onbekend") : base(title, author, iSBN, publicationYear, genre)
     {
       FileSize = fileSize;
 
@@ -17,7 +17,7 @@ namespace Bibliotheekbeheer
 
     public override void DisplayDetails()
     {
-      Console.WriteLine($"Titel: {Title}\nAuteur: {Author}\nPublicatiejaar: {PublicationYear}\nGenre: {Genre}\nFileSize: {FileSize}");
+      Console.WriteLine($"Titel: {Title}\nAuteur: {Author}\nPublicatiejaar: {PublicationYear}\nGenre: {Genre}\nISBN: {ISBN}\nFileSize: {FileSize}");
     }
 
   }

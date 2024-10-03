@@ -15,8 +15,19 @@ namespace Bibliotheekbeheer
 
 
     //remove book with isbn
-    public void RemoveBook(string isbn)
+    public void RemoveBook(int isbn)
     {
+
+      Book? book = Books.FirstOrDefault(b => b.ISBN == isbn);
+
+      if (book != null)
+      {
+        Books.Remove(book);
+      } else{
+        Console.WriteLine("Boek is niet bekend in de bibliotheek.");
+      }
+                  
+
 
     }
 
