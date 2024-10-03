@@ -1,0 +1,14 @@
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\obj\Debug\net8.0\BibliotheekBeheerSysteem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\obj\Debug\net8.0\BibliotheekBeheerSysteem.AssemblyInfoInputs.cache
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\obj\Debug\net8.0\BibliotheekBeheerSysteem.AssemblyInfo.cs
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\obj\Debug\net8.0\BibliotheekBeheerSysteem.csproj.CoreCompileInputs.cache
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\bin\Debug\net8.0\BibliotheekBeheerSysteem.exe
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\bin\Debug\net8.0\BibliotheekBeheerSysteem.deps.json
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\bin\Debug\net8.0\BibliotheekBeheerSysteem.runtimeconfig.json
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\bin\Debug\net8.0\BibliotheekBeheerSysteem.dll
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\bin\Debug\net8.0\BibliotheekBeheerSysteem.pdb
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\obj\Debug\net8.0\BibliotheekBeheerSysteem.dll
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\obj\Debug\net8.0\refint\BibliotheekBeheerSysteem.dll
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\obj\Debug\net8.0\BibliotheekBeheerSysteem.pdb
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\obj\Debug\net8.0\BibliotheekBeheerSysteem.genruntimeconfig.cache
+C:\Users\annie\Documents\Galileo Academy\Projecten\Assignment1\BibliotheekBeheerSysteem\obj\Debug\net8.0\ref\BibliotheekBeheerSysteem.dll
