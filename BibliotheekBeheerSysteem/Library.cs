@@ -10,10 +10,14 @@ namespace Bibliotheekbeheer
     List<Book> Books = new List<Book>();
     public string LibraryName { get; set; }
 
+    private static string libraryFolderPath = "Libraryfiles";
+
 
     public Library(string libraryName = "")
     {
       LibraryName = libraryName;
+
+
     }
 
 
@@ -34,6 +38,8 @@ namespace Bibliotheekbeheer
       if (book != null)
       {
         Books.Remove(book);
+        //update file
+        SaveLibraryToFile();
       }
       else
       {
@@ -72,6 +78,7 @@ namespace Bibliotheekbeheer
       }
     }
 
+    //search book by genre
     public List<Book> SearchBookByGenre(string genre)
     {
       List<Book> result = new List<Book>();
@@ -85,9 +92,10 @@ namespace Bibliotheekbeheer
       return result;
     }
 
+    // search book in library by publicationYear
     public List<Book> SearchBookByPublicationYear(string publicationYear)
     {
-       List<Book> result = new List<Book>();
+      List<Book> result = new List<Book>();
       foreach (Book book in Books)
       {
         if (book.isMatchYear(publicationYear))
@@ -98,6 +106,7 @@ namespace Bibliotheekbeheer
       return result;
     }
 
+    //search book in library by isbn
     public List<Book> SearchBookByIsbn(string isbn)
     {
       List<Book> result = new List<Book>();
@@ -111,45 +120,49 @@ namespace Bibliotheekbeheer
       return result;
     }
 
-
+    //save library to the file with libraryName
     public void SaveLibraryToFile()
     {
-
-      if (File.Exists(LibraryName))
-      {
-        //load file
-        LoadLibraryFromFile();
-
-
-      }
       //create/update file
-        string jsonString = JsonSerializer.Serialize(Books);
-        File.WriteAllText(LibraryName, jsonString);
+      
+      string jsonString = JsonSerializer.Serialize(Books);
+      string filePath = Path.Combine(libraryFolderPath, LibraryName + ".json");
+      File.WriteAllText(filePath, jsonString);
 
     }
 
+    //load library from file with libraryName
     public void LoadLibraryFromFile()
     {
-      if (File.Exists(LibraryName))
-      {
+      string filePath = Path.Combine(libraryFolderPath, LibraryName + ".json");
 
-        string jsonString = File.ReadAllText(LibraryName);
-        List<Book> loadedBooks = JsonSerializer.Deserialize<List<Book>>(jsonString);
-        foreach(Book book in loadedBooks)
+      if (File.Exists(filePath))
+      {
+        string jsonString = File.ReadAllText(filePath);
+
+        List<Book>? loadedBooks = JsonSerializer.Deserialize<List<Book>>(jsonString);
+        if (loadedBooks != null)
         {
-          Books.Add(book);
+          foreach (Book book in loadedBooks)
+          {
+            Books.Add(book);
+          }
+
+
+          Console.WriteLine($"\nBibliotheek {LibraryName} geopend met {Books.Count} boek(en).\n");
+
+        }
+        else
+        {
+          Console.WriteLine($"Geen bibliotheek gevonden bij {LibraryName}.\n");
         }
 
 
-        Console.WriteLine($"\nBibliotheek {LibraryName} geopend met {Books.Count} boek(en).\n");
-
-
-
-
       }
 
     }
 
+    //Open exting library
     public void OpenLibrary(string libraryName)
     {
       //empty list
@@ -159,5 +172,48 @@ namespace Bibliotheekbeheer
 
     }
 
+    //show all existing libraries
+    public static void ShowAllLibraries()
+    {
+      //find all json files in folder
+      string[] files = Directory.GetFiles(libraryFolderPath, "*.json");
+
+      if (files.Length > 0)
+      {
+        Console.WriteLine("Huidige bibliotheken: ");
+        foreach (string file in files)
+        {
+          Console.WriteLine(Path.GetFileNameWithoutExtension(file));
+        }
+        Console.WriteLine();
+
+      }
+      else
+      {
+        Console.WriteLine("Geen bibliotheken gevonden.\n");
+      }
+
+    }
+
+    //check if library exist
+    public static bool LibraryExist(string fileName)
+    {
+
+      string filePath = Path.Combine(libraryFolderPath, fileName + ".json");
+      //check if file exist
+      if (File.Exists(filePath))
+      {
+        //load library
+        return true;
+        
+
+      }
+
+      return false;
+
+    }
+
   }
+
+  
 }
