@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace Bibliotheekbeheer
 {
 
@@ -6,6 +8,15 @@ namespace Bibliotheekbeheer
 
     //properties
     List<Book> Books = new List<Book>();
+    public string LibraryName { get; set; }
+
+
+    public Library(string libraryName = "")
+    {
+      LibraryName = libraryName;
+    }
+
+
 
     //Add book to Library
     public void AddBook(Book book)
@@ -23,10 +34,12 @@ namespace Bibliotheekbeheer
       if (book != null)
       {
         Books.Remove(book);
-      } else{
+      }
+      else
+      {
         Console.WriteLine("Boek is niet bekend in de bibliotheek.");
       }
-                  
+
 
 
     }
@@ -59,7 +72,92 @@ namespace Bibliotheekbeheer
       }
     }
 
+    public List<Book> SearchBookByGenre(string genre)
+    {
+      List<Book> result = new List<Book>();
+      foreach (Book book in Books)
+      {
+        if (book.isMatchGenre(genre))
+        {
+          result.Add(book);
+        }
+      }
+      return result;
+    }
 
+    public List<Book> SearchBookByPublicationYear(string publicationYear)
+    {
+       List<Book> result = new List<Book>();
+      foreach (Book book in Books)
+      {
+        if (book.isMatchYear(publicationYear))
+        {
+          result.Add(book);
+        }
+      }
+      return result;
+    }
+
+    public List<Book> SearchBookByIsbn(string isbn)
+    {
+      List<Book> result = new List<Book>();
+      foreach (Book book in Books)
+      {
+        if (book.isMatchISBN(isbn))
+        {
+          result.Add(book);
+        }
+      }
+      return result;
+    }
+
+
+    public void SaveLibraryToFile()
+    {
+
+      if (File.Exists(LibraryName))
+      {
+        //load file
+        LoadLibraryFromFile();
+
+
+      }
+      //create/update file
+        string jsonString = JsonSerializer.Serialize(Books);
+        File.WriteAllText(LibraryName, jsonString);
+
+    }
+
+    public void LoadLibraryFromFile()
+    {
+      if (File.Exists(LibraryName))
+      {
+
+        string jsonString = File.ReadAllText(LibraryName);
+        List<Book> loadedBooks = JsonSerializer.Deserialize<List<Book>>(jsonString);
+        foreach(Book book in loadedBooks)
+        {
+          Books.Add(book);
+        }
+
+
+        Console.WriteLine($"\nBibliotheek {LibraryName} geopend met {Books.Count} boek(en).\n");
+
+
+
+
+      }
+
+    }
+
+    public void OpenLibrary(string libraryName)
+    {
+      //empty list
+      Books = new List<Book>();
+      this.LibraryName = libraryName;
+      LoadLibraryFromFile();
+
+    }
 
   }
 }

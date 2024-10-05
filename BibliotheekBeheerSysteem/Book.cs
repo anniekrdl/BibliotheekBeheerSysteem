@@ -12,7 +12,7 @@ namespace Bibliotheekbeheer
 
 
     //constructor
-    public Book(string title, string author, int iSBN = 0, int publicationYear = 0000, string genre = "Onbekend")
+    public Book(string title, string author, int? iSBN = null, int? publicationYear = null, string genre = "Onbekend")
     {
       Title = title;
       Author = author;
@@ -36,10 +36,24 @@ namespace Bibliotheekbeheer
 
     }
 
+    public bool isMatchGenre(string searchQuery)
+    {
+      return Genre.ToLower().Contains(searchQuery.ToLower());
+    }
+
+    public bool isMatchYear(string searchQuery)
+    {
+      return PublicationYear == Int32.Parse(searchQuery);
+    }
+    public bool isMatchISBN(string searchQuery)
+    {
+      return ISBN == Int32.Parse(searchQuery);
+    }
+
     
     public void Read()
     {
-      Console.WriteLine($"Lezen {Title} door {Author}");
+      Console.WriteLine($"{Title} geschreven door {Author} aan het lezen.....");
       
     }
   }

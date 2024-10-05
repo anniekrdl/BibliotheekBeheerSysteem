@@ -6,11 +6,13 @@ namespace Bibliotheekbeheer
   {
 
     Library library = new Library();
+
     bool programRunning = true;
 
     //Show user menu
     public void DisplayMenu()
     {
+
       string question =
         "WAT WIL JE DOEN?\n" +
         "----------------\n" +
@@ -19,6 +21,8 @@ namespace Bibliotheekbeheer
         "Een boek verwijderen [delete]\n" +
         "Een boek zoeken [search]\n" +
         "Alle boeken tonen [list]\n" +
+        "Sla de library op [save]\n" +
+        "Open andere bibliotheek [open]\n" +
         "Sluit de bibliotheek af [close]\n";
 
       string choice = GetUserInput(question);
@@ -27,7 +31,7 @@ namespace Bibliotheekbeheer
 
       {
         case "read":
-          Console.WriteLine("not implemented yet");
+          ReadBook();
           break;
         case "add":
           addBook();
@@ -41,6 +45,12 @@ namespace Bibliotheekbeheer
         case "list":
           library.ListBooks();
           break;
+        case "save":
+          library.SaveLibraryToFile();
+          break;
+        case "open":
+          OpenLibrary();
+          break;
         case "close":
           programRunning = false;
           break;
@@ -50,19 +60,92 @@ namespace Bibliotheekbeheer
 
     }
 
+        private void OpenLibrary()
+        {
+            string libraryTitle = GetUserInput("Welke bibliotheek wil je openen/maken?");
+            library.OpenLibrary(libraryTitle);
+        }
 
+        private void ReadBook()
+    {
+      //select book
+      string TitleBook = GetUserInput("Wat is de titel van het boek dat je wil lezen?");
+      List<Book> foundBooks = library.SearchBook(TitleBook);
+      if (foundBooks.Count > 0)
+      {
+        Book book = foundBooks.First();
+        book.Read();
+      }
+      else
+      {
+        Console.WriteLine("Geen boeken gevonden.");
+      }
+
+    }
 
     private void searchBook()
     {
       string searchQuery = GetUserInput("Voer de titel of auteur in van het boek dat je zoekt: ");
       List<Book> books = library.SearchBook(searchQuery);
-      Console.WriteLine("\nGevonden boeken:");
-      foreach (Book book in books)
+
+      if (books.Count > 0)
       {
-        book.DisplayDetails();
-        Console.WriteLine();
+        Console.WriteLine("\nGevonden boeken:");
+        foreach (Book book in books)
+        {
+          book.DisplayDetails();
+          Console.WriteLine();
+
+        }
 
       }
+      else
+      {
+        Console.WriteLine("\nGeen boeken gevonden");
+        string extendedSearch = GetUserInput("Wil je uitgebreid zoeken? [y/n]");
+        if (extendedSearch == "y")
+        {
+          string searchType = GetUserInput("Wil je op genre [g], publicatiejaar [p] of isbn [i] zoeken?");
+
+          switch (searchType)
+          {
+            case "g":
+              string genre = GetUserInput("Voer het genre in: ");
+              List<Book> booksByGenre = library.SearchBookByGenre(genre);
+              foreach (Book book in booksByGenre)
+              {
+                book.DisplayDetails();
+                Console.WriteLine();
+
+              }
+              break;
+            case "p":
+              string publicationYear = GetUserInput("Voer het publicatiejaar in: ");
+              List<Book> booksByPublicationYear = library.SearchBookByPublicationYear(publicationYear);
+              foreach (Book book in booksByPublicationYear)
+              {
+                book.DisplayDetails();
+                Console.WriteLine();
+
+              }
+              break;
+            case "i":
+              string isbn = GetUserInput("Voer het isbn in: ");
+              List<Book> booksByIsbn = library.SearchBookByIsbn(isbn);
+              foreach (Book book in booksByIsbn)
+              {
+                book.DisplayDetails();
+                Console.WriteLine();
+
+              }
+              break;
+          }
+
+        }
+
+
+      }
+
 
 
     }
@@ -98,7 +181,7 @@ namespace Bibliotheekbeheer
           string inputQ = GetUserInput($"Wil je een {options[i]} toevoegen? [y/n]");
           if (inputQ.ToLower().Trim() == "y")
           {
-
+            // TODO evt omzetten naar Dictionary.
             switch (options[i])
             {
               case "ISBN":
@@ -123,7 +206,7 @@ namespace Bibliotheekbeheer
 
       }
 
-      // is het een ebook?
+      //check if ebook
       string input = GetUserInput("Is het boek een Ebook? [y/n]");
       // make ebook save as Book in list
       if (input.ToLower().Trim() == "y")
@@ -146,6 +229,10 @@ namespace Bibliotheekbeheer
 
       }
 
+
+      //save/update library file
+      library.SaveLibraryToFile();
+
     }
 
 
@@ -165,6 +252,7 @@ namespace Bibliotheekbeheer
 
       return input;
     }
+
 
 
 
@@ -197,10 +285,20 @@ namespace Bibliotheekbeheer
     public void Run()
     {
 
+      string startQuestion = "Hoe heet je bibliotheek?";
+      string input = GetUserInput(startQuestion);
+      library.LibraryName = input.Trim();
+
+      // check if library exist
+      if (File.Exists(library.LibraryName))
+      {
+        library.LoadLibraryFromFile();
+      }
 
 
       while (programRunning)
       {
+
         DisplayMenu();
       }
 
