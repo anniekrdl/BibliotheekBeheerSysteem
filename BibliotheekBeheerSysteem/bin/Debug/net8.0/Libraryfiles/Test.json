@@ -1,0 +1,45 @@
+[
+    {
+        "Title": "Ik ben pelgrim",
+        "Author": "Terry Hayes",
+        "ISBN": 12345678,
+        "PublicationYear": 2011,
+        "Genre": "Fictie"
+    },
+    {
+        "Title": "De Da Vinci Code",
+        "Author": "Dan Brown",
+        "ISBN": 87654321,
+        "PublicationYear": 2003,
+        "Genre": "Thriller"
+    },
+    {
+        "Title": "De Alchemist",
+        "Author": "Paulo Coelho",
+        "ISBN": 23456789,
+        "PublicationYear": 1988,
+        "Genre": "Fictie"
+    },
+    {
+        "Title": "Sapiens: Een kleine geschiedenis van de mensheid",
+        "Author": "Yuval Noah Harari",
+        "ISBN": 34567890,
+        "PublicationYear": 2011,
+        "Genre": "Non-fictie"
+    },
+    {
+        "Title": "De vliegeraar",
+        "Author": "Khaled Hosseini",
+        "ISBN": 98765432,
+        "PublicationYear": 2003,
+        "Genre": "Drama"
+    },
+    {
+        "Title": "1984",
+        "Author": "George Orwell",
+        "ISBN": 56789012,
+        "PublicationYear": 1949,
+        "Genre": "Dystopie"
+    }
+    
+]

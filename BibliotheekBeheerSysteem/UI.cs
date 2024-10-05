@@ -9,7 +9,7 @@ namespace Bibliotheekbeheer
 
     bool programRunning = true;
 
-    //Show user menu
+    //Displays users menu.
     public void DisplayMenu()
     {
 
@@ -21,7 +21,6 @@ namespace Bibliotheekbeheer
         "Een boek verwijderen [delete]\n" +
         "Een boek zoeken [search]\n" +
         "Alle boeken tonen [list]\n" +
-        "Sla de library op [save]\n" +
         "Open andere bibliotheek [open]\n" +
         "Sluit de bibliotheek af [close]\n";
 
@@ -45,9 +44,6 @@ namespace Bibliotheekbeheer
         case "list":
           library.ListBooks();
           break;
-        case "save":
-          library.SaveLibraryToFile();
-          break;
         case "open":
           OpenLibrary();
           break;
@@ -60,13 +56,18 @@ namespace Bibliotheekbeheer
 
     }
 
-        private void OpenLibrary()
-        {
-            string libraryTitle = GetUserInput("Welke bibliotheek wil je openen/maken?");
-            library.OpenLibrary(libraryTitle);
-        }
+    //open or create a library.
+    private void OpenLibrary()
+    {
+      //list all known libraries.
+      Library.ShowAllLibraries();
 
-        private void ReadBook()
+      string libraryTitle = GetUserInput("Welke bibliotheek wil je openen/maken?");
+      library.OpenLibrary(libraryTitle);
+    }
+
+    //read a book.
+    private void ReadBook()
     {
       //select book
       string TitleBook = GetUserInput("Wat is de titel van het boek dat je wil lezen?");
@@ -83,6 +84,7 @@ namespace Bibliotheekbeheer
 
     }
 
+    //search book in library by author or title.
     private void searchBook()
     {
       string searchQuery = GetUserInput("Voer de titel of auteur in van het boek dat je zoekt: ");
@@ -101,6 +103,7 @@ namespace Bibliotheekbeheer
       }
       else
       {
+        //nothing found, searh by genre, isbn or year.
         Console.WriteLine("\nGeen boeken gevonden");
         string extendedSearch = GetUserInput("Wil je uitgebreid zoeken? [y/n]");
         if (extendedSearch == "y")
@@ -150,6 +153,7 @@ namespace Bibliotheekbeheer
 
     }
 
+    //remove book from library
     private void deleteBook()
     {
       string isbn = TryParseToInt("Wat is het isbn nummer van het boek dat je wil verwijderen? ");
@@ -159,6 +163,7 @@ namespace Bibliotheekbeheer
     }
 
 
+    // add book to library
     private void addBook()
     {
       string title = GetUserInput("Wat is de titel van het boek?");
@@ -237,16 +242,18 @@ namespace Bibliotheekbeheer
 
 
 
+    //parse string to int.
     public string TryParseToInt(string question)
     {
-      Console.WriteLine(question);
-      string input = Console.ReadLine();
+
+      string input = GetUserInput(question);
+
 
       while (!int.TryParse(input, out _))
       {
         Console.WriteLine("Dit is geen geldig getal. Probeer het opnieuw.");
-        Console.WriteLine(question);
-        input = Console.ReadLine();
+        input = GetUserInput(question);
+
 
       }
 
@@ -284,15 +291,17 @@ namespace Bibliotheekbeheer
     //runs the program
     public void Run()
     {
-
-      string startQuestion = "Hoe heet je bibliotheek?";
+      Library.ShowAllLibraries();
+      string startQuestion = "Hoe heet je nieuwe of bestaande bibliotheek?";
       string input = GetUserInput(startQuestion);
       library.LibraryName = input.Trim();
 
       // check if library exist
-      if (File.Exists(library.LibraryName))
+      
+      if (Library.LibraryExist(library.LibraryName))
       {
-        library.LoadLibraryFromFile();
+        library.OpenLibrary(library.LibraryName);
+        
       }
 
 

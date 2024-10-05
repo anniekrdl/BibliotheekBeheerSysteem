@@ -36,21 +36,25 @@ namespace Bibliotheekbeheer
 
     }
 
+    //check if searchquery matches with genre
     public bool isMatchGenre(string searchQuery)
     {
       return Genre.ToLower().Contains(searchQuery.ToLower());
     }
 
+    //check if searchquery matches with publicationYear
     public bool isMatchYear(string searchQuery)
     {
       return PublicationYear == Int32.Parse(searchQuery);
     }
+
+    //check if searchquery matches isbn
     public bool isMatchISBN(string searchQuery)
     {
-      return ISBN == Int32.Parse(searchQuery);
+      return ISBN == int.Parse(searchQuery);
     }
 
-    
+    //read book
     public void Read()
     {
       Console.WriteLine($"{Title} geschreven door {Author} aan het lezen.....");
